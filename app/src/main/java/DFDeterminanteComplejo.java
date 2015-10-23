@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Created by federicolizondo on 02/10/15.
- */
+ **/
 public class DFDeterminanteComplejo extends DependenciaFuncional {
 
     private ArrayList<String> determinante;
