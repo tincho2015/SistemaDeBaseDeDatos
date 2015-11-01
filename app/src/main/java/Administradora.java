@@ -79,34 +79,54 @@ public class Administradora {
 
     public void calcularClavesCandidatas(){
 
-        ArrayList<String> lposibles = new ArrayList<String>(lAtributos);
-        ArrayList<String> lclaves = new ArrayList<String>(lAtributos);
-        ArrayList<String> determinante=new ArrayList<>();
+        ArrayList<String> lposibles;
+        ArrayList<String> laux = new ArrayList<String>();
+
+        ArrayList<String> lprefijoClave = new ArrayList<String>(lAtributos);
+        ArrayList<String> determinante=new ArrayList<String>();
         ArrayList<String> determinado = new ArrayList<String>();
 
-        //ELIMINO TODOS LOS ATRIBUTOS REDUNDANTES
+        int cantPrefijos = 0; //Contiene la cantidad de Elementos de los prefijos
+        int cantPosible = 0; //Contiene la cantidad de elementos para las claves
+        int i = 0;
 
+       //Obtengo todos los Determinantes y todos los Determinados
         for (DependenciaFuncional df : lDependenciasFuncionales) {
             determinante.addAll(df.getDeterminante());
             determinado.addAll(df.getDeterminado());
         }
+
         //Elimino Elementos Repetidos
         determinante= new ArrayList<String>(new HashSet<String>(determinante));
         determinado = new ArrayList<String>(new HashSet<String>(determinado));
-        determinado.removeAll(determinante);
-        lposibles.removeAll(determinado);
 
-        //Si hay atributos de una sola clave
-        for (String la : lposibles) {
-            lclaves = new ArrayList<String>();
-            lclaves.add(la);
-            if(calcularUniverso(lclaves))
+        //Obtengo atributos que no esten en determinantes y determinados;
+        lprefijoClave.removeAll(determinado);
+        lprefijoClave.removeAll(determinante);
+
+        //Cargo la lista de los posibles componentes de las claves
+        lposibles = determinante;
+        cantPosible = lposibles.size();
+        cantPrefijos = lposibles.size();
+
+        int auxE = 0;
+
+        while (i<cantPosible )//&& calcularUniverso(lposibles))
+        {
+            auxE = i;
+            lprefijoClave.add(lposibles.get(i));
+            while (auxE>0)
             {
-                claves.add(lclaves);
-               lposibles.remove(la);
+                auxE--;
             }
-        }
 
+            if(calcularUniverso(lposibles))
+            {
+                this.claves.add(lprefijoClave);
+            }
+
+            i++;
+        }
 
     }
 
