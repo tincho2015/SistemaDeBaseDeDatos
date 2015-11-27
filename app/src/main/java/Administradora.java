@@ -130,7 +130,6 @@ public class Administradora {
                 }
             }
         }
-
         return claves;
     }
 
@@ -206,7 +205,9 @@ public class Administradora {
     //Tableaux
 
     //FORMA NORMAL
-
+    public FormaNormal calcularFormaNormal() {
+        return null;
+    }
     //FMIN
     public ArrayList<DependenciaFuncional> calcularFmin(){
         ArrayList<DependenciaFuncional> lAuxDependenciaFuncional = new ArrayList<DependenciaFuncional>();
@@ -221,16 +222,77 @@ public class Administradora {
         for (DependenciaFuncional df : lAuxDependenciaFuncional) {
                 if(df.soyDeterminanteComplejo())
                 {
-
+                    ArrayList<String> aux = calcularRedundanciaDeterminante(null, df.getDeterminante(), df.getDeterminado().get(0));
+                    if (aux.containsAll(df.getDeterminante())) {
+                        DependenciaFuncional dfAux;
+                        if (aux.size() > 1) {
+                            //ES UN DETERMINANTE SIMPLE
+                            dfAux = new DFSimple(aux.get(0), df.getDeterminado().get(0));
+                        } else {
+                            //ES UN DETERMINANTE COMPLEJO
+                            dfAux = new DFDeterminanteComplejo(aux, df.getDeterminado().get(0));
+                        }
+                        if (!lDependenciasFuncionales.contains(dfAux)) {
+                            lDependenciasFuncionales.add(dfAux);
+                        }
+                    } else
+                        lDependenciasFuncionales.add(df);
                 }
                 else
                 lDependenciasFuncionales.add(df);
         }
 
+        //ELIMINO REDUNDANCIAS
+        //Si Obtengo El mismo resultado calculando la clausura  , quitando la df (se calcula la clausura con Determinante)
+
         return  lDependenciasFuncionales;
     }
 
+    private ArrayList<String> calcularRedundanciaDeterminante(ArrayList<String> Prefijo, ArrayList<String> Determinante, String Determinado) {
+        //Calcula todas las combinaciones posibles del Determinante y evalua si son redundantes
 
+        if (Prefijo == null) {
+            Prefijo = new ArrayList<String>();
+        }
+        if (Determinante == null || Determinante.isEmpty()) {
+            if (Determinante == null) {
+                Determinante = new ArrayList<String>();
+            }
+            return Determinante;
+        }
+        ArrayList<String> lretorno = new ArrayList<String>();
+
+        ArrayList<String> lAux = new ArrayList<String>();
+        ArrayList<String> lAuxII = new ArrayList<String>(Prefijo);
+        ArrayList<String> lAuxDeterminantes = new ArrayList<String>(Determinante);
+
+        for (String s : Determinante) {
+            lAuxII.add(s);
+            lAuxDeterminantes.remove(s);
+            lAux = calcularRedundanciaDeterminante(lAuxII, lAuxDeterminantes, Determinado);
+            /*if(!lAux.isEmpty())
+            {
+                //PODRÍA ASUMIR QUE SI lAux != NULL ,ENTONCES TIENE EL DETERMINADO NO REDUNDANTE
+                if( (calcularClausura(lAux).contains(Determinado) ))
+                {
+                    if( lretorno.isEmpty() )
+                        lretorno = lAux;
+                    else
+                    if( lAux.size() < lretorno.size() )
+                        lretorno = lAux;
+                }
+            }*/
+            //------------REDUNDANCIA----------------------//
+            if (!lAux.isEmpty() && calcularClausura(lAux).contains(Determinado) && (lretorno.isEmpty() || (!lretorno.isEmpty() && lAux.size() < lretorno.size()))) {
+                lretorno = lAux;
+            }
+            if (calcularClausura(lAuxII).contains(Determinado) && (lretorno.isEmpty() || (!lretorno.isEmpty() && lAuxII.size() < lretorno.size()))) {
+                lretorno = lAuxII;
+            }
+            lAuxII.remove(s);
+        }
+        return lretorno;
+    }
 
 
 
