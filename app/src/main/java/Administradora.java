@@ -212,22 +212,129 @@ public class Administradora {
 
     //TODO
     public FormaNormal calcularFormaNormal() {
-        return null;
+
+        if (lDependenciasFuncionales.isEmpty() || fmin.isEmpty() || lAtributos.size() <= 2) {
+            formaNormal = new FNBC();
+            return formaNormal;
+        }
+
+        ArrayList<String> clave = claves.get(0);
+
+        for (DependenciaFuncional df : fmin) {
+
+        }
+        int tam = lDependenciasFuncionales.size();
+        int i = 0;
+        FormaNormal fnAux = null;
+
+        while (i < tam && (formaNormal == null || !formaNormal.soyPrimeraFN())) {
+            fnAux = determinarFormaNormalDF(lDependenciasFuncionales.get(i), clave);
+            //PERDÓN MUNDO POR LA SENTENCIA TAN FEA !!!!
+            if (fnAux != null && (formaNormal == null ||
+                    fnAux.soyPrimeraFN() || //SI fnAUX  esta en 1FN  No calculo mas y asigo a FN
+                    (fnAux.soySegundaFN() && (formaNormal.soyFNBC() || formaNormal.soyTerceraFN())) || // Si FnAux es 2FN solo REEMPLAZO SI FN ESTA EN FNBC o 3FN
+                    (fnAux.soyTerceraFN() && formaNormal.soyFNBC()))) //Si FNAux esta en 3FN SOLO LO REEMPLAZO SI FN ESTA EN FNBC
+                formaNormal = fnAux;
+            i++;
+        }
+
+        return formaNormal;
+
     }
 
-    //TODO
+    private FormaNormal determinarFormaNormalDF(DependenciaFuncional df, ArrayList<String> clave) {
+        if (df == null || clave == null)
+            return null;
+
+        ArrayList<String> determinante = df.getDeterminante();
+        ArrayList<String> determinado = df.getDeterminado();
+
+        if (determinante.containsAll(clave))
+            return new FNBC();
+        else {
+            int tam = determinado.size();
+            int i = 0;
+            while (i < tam && !clave.contains(determinado.get(i))) {
+                i++;
+            }
+            //SI EL DETERMINADO CONTIENE UNA PARTE DE LA CLAVE ESTA EN 3FN
+            if (i < tam)
+                return new TerceraFormaNormal(df);
+
+            tam = determinante.size();
+            i = 0;
+            while (i < tam && !clave.contains(determinado.get(i))) {
+                i++;
+            }
+            //SI EL DETERMINANTE NO CONTIENE PARTE DE LA CLAVE CAND ESTA EN 2FN
+            if (i >= tam)
+                return new SegundaFormaNormal(df);
+            //SI NO ESTA EN NINGUNA DE LAS FORMAS ANTERIORES SI O SI DEBE ESTAR EN 1FN
+            return new PrimeraFormaNormal(df);
+        }
+
+    }
+
     public boolean tieneDescomposicion3FN() {
-        return true;
+        return !formaNormal.soyTerceraFN();
     }
 
-    //TODO
     public boolean tieneDescomposicionFNBC() {
-        return true;
+        return !formaNormal.soyFNBC();
     }
 
-    //TODO
-    public ArrayList<ArrayList<String>> calcularDescomposicion3FN() {
-        return null;
+    public ArrayList<ArrayList<DependenciaFuncional>> calcularDescomposicion3FN() {
+        if (fmin == null || claves == null || claves.isEmpty())
+            return null;
+
+        ArrayList<ArrayList<DependenciaFuncional>> descomposicion = new ArrayList<ArrayList<DependenciaFuncional>>();
+        ArrayList<String> clave = claves.get(0);
+
+        int tam = fmin.size();
+        int i = 0;
+        int tamDescomposicion = descomposicion.size();
+        int x = 0;
+        while (i < tam && !fmin.get(i).getDeterminante().containsAll(clave)) {
+            x = 0;
+            while (x < tamDescomposicion && !(descomposicion.get(x)).get(0).getDeterminante().containsAll(fmin.get(i).getDeterminante())) {
+                x++;
+            }
+            if (x < tamDescomposicion) {
+                descomposicion.get(x).add(fmin.get(i));
+            } else {
+                ArrayList<DependenciaFuncional> lDFAux = new ArrayList<DependenciaFuncional>();
+                lDFAux.add(fmin.get(i));
+                descomposicion.add(lDFAux);
+            }
+            i++;
+        }
+
+        if (!(i < tam)) {
+            ArrayList<DependenciaFuncional> lDFAux = new ArrayList<DependenciaFuncional>();
+            DependenciaFuncional DFAux;
+            if (clave.size() > 1)
+                DFAux = new DFDeterminanteComplejo(clave, "");
+            else
+                DFAux = new DFSimple(clave.get(0), "");
+
+            lDFAux.add(DFAux);
+            descomposicion.add(lDFAux);
+        } else {
+            x = 0;
+            while (x < tamDescomposicion && !(descomposicion.get(x)).get(0).getDeterminante().containsAll(fmin.get(i).getDeterminante())) {
+                x++;
+            }
+            if (x < tamDescomposicion) {
+                descomposicion.get(x).add(fmin.get(i));
+            } else {
+                ArrayList<DependenciaFuncional> lDFAux = new ArrayList<DependenciaFuncional>();
+                lDFAux.add(fmin.get(i));
+                descomposicion.add(lDFAux);
+            }
+            i++;
+        }
+
+        return descomposicion;
     }
 
     //TODO
@@ -293,9 +400,7 @@ public class Administradora {
             lDependenciasFuncionales.remove(df);
             B = calcularClausura(df.getDeterminante());
             if ((A.size() != B.size()))          //Si Obtengo El mismo resultado calculando la clausura  , quitando la df (se calcula la clausura con Determinante)
-
                 lDependenciasFuncionales.add(df);
-
         }
 
         fmin = new ArrayList<DependenciaFuncional>();
@@ -341,7 +446,8 @@ public class Administradora {
         return lretorno;
     }
 
-    //TABLEAUX
+    //TABLEAUX TODO
+
 
 
 }

@@ -9,8 +9,19 @@ public abstract class FormaNormal {
     @Override
     public abstract String toString() ;
 
+    public abstract boolean soyFNBC();
+
+    public abstract boolean soyTerceraFN();
+
+    public abstract boolean soySegundaFN();
+
+    public abstract boolean soyPrimeraFN();
+
+
     public FormaNormal obtenerFormaNormal()
     {
        return  null;
     }
+
+
 }

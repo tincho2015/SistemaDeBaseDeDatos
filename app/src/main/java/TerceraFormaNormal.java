@@ -21,4 +21,24 @@ public class TerceraFormaNormal extends FormaNormal {
     public String toString() {
         return "TERCERA FORMA NORMAL";
     }
+
+    @Override
+    public boolean soyFNBC() {
+        return false;
+    }
+
+    @Override
+    public boolean soyTerceraFN() {
+        return true;
+    }
+
+    @Override
+    public boolean soySegundaFN() {
+        return false;
+    }
+
+    @Override
+    public boolean soyPrimeraFN() {
+        return false;
+    }
 }
