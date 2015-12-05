@@ -25,6 +25,9 @@ public abstract class  DependenciaFuncional {
     public abstract ArrayList<String> getDeterminado();
     public abstract boolean soyDeterminanteComplejo();
     public abstract boolean soyCompleja();
+
+    public abstract ArrayList<String> dameAtributos();
+
     @Override
     public abstract String toString();
     @Override

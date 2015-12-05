@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by federicolizondo on 02/10/15.
@@ -17,7 +18,7 @@ public class DFDeterminanteComplejo extends DependenciaFuncional {
 
     @Override
     public boolean tengoDF(String determinante, String determinado) {
-        return this.determinante.contains(determinante) && this.determinado == determinado;
+        return this.determinante.contains(determinante) && this.determinado.equals(determinado);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class DFDeterminanteComplejo extends DependenciaFuncional {
     @Override
     public boolean equals(Object o) {
         if(o == this){ return true; }
-        if(o != null || !(o instanceof DependenciaFuncional))
+        if (o != null && (o instanceof DependenciaFuncional))
         {
             DependenciaFuncional DF = (DependenciaFuncional) o;
             ArrayList<String> lDeterminantes = DF.getDeterminante();
@@ -83,5 +84,14 @@ public class DFDeterminanteComplejo extends DependenciaFuncional {
             return  ( i == tam ) && lDeterminado.contains(this.determinado);
         }
         return false;
+    }
+
+    @Override
+    public ArrayList<String> dameAtributos() {
+        ArrayList<String> aux = new ArrayList<String>();
+        aux.addAll(determinante);
+        aux.add(determinado);
+        aux = new ArrayList<String>(new HashSet<String>(aux));
+        return aux;
     }
 }

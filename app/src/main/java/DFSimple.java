@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 /**
  * Created by federicolizondo on 02/10/15.
  */
@@ -18,7 +19,7 @@ public class DFSimple extends DependenciaFuncional{
 
     @Override
     public boolean tengoDF(String determinante, String determinado) {
-        return  this.determinado == determinado && this.determinante == determinado;
+        return this.determinado.equals(determinado) && this.determinante.equals(determinado);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class DFSimple extends DependenciaFuncional{
     @Override
     public boolean equals(Object o) {
         if(o == this){ return true; }
-        if(o != null || !(o instanceof DependenciaFuncional))
+        if (o != null && o instanceof DependenciaFuncional)
         {
                 DependenciaFuncional DF = (DependenciaFuncional) o;
                 ArrayList<String> lDeterminantes = DF.getDeterminante();
@@ -72,5 +73,13 @@ public class DFSimple extends DependenciaFuncional{
         ArrayList<String> a = new ArrayList<String>();
         a.add(this.determinado);
         return a;
+    }
+
+    @Override
+    public ArrayList<String> dameAtributos() {
+        ArrayList<String> aux = new ArrayList<String>();
+        aux.add(determinante);
+        aux.add(determinado);
+        return aux;
     }
 }
