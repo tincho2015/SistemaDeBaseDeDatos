@@ -52,14 +52,7 @@ public class DFDeterminanteComplejo extends DependenciaFuncional {
 
     @Override
     public String toString() {
-        /*String s="";
-        for (String d : determinante) {
-            s+=d+",";
-        }
-        if(s.endsWith(",")){s = s.substring(0,s.length()-2);}
-        s+=" -> "+this.determinado;
-        return s;*/
-        return determinante+" - > "+determinado;
+        return determinante + ((!determinado.isEmpty()) ? " - > " : "") + determinado;
     }
 
     @Override

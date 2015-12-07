@@ -121,15 +121,12 @@ public class Administradora {
         calcularClavesRecursivo(lprefijoClave,lposibles);
 
         //ELIMINÓ CLAVES NO CANDIDATAS
-
         ArrayList<ArrayList<String>> lAuxClave = new ArrayList<ArrayList<String>>(claves);
-        //TODO VER CODIGO
-        for(ArrayList<String> clave : claves) {
+        ArrayList<ArrayList<String>> lAuxClave2 = new ArrayList<ArrayList<String>>(claves);
+        for (ArrayList<String> clave : lAuxClave2) {
             for (ArrayList<String> string : lAuxClave) {
-                if (string.containsAll(clave) && string.size() < clave.size())
-                {
+                if (string.containsAll(clave) && clave.size() < string.size())
                     claves.remove(string);
-                }
             }
         }
 
@@ -324,29 +321,80 @@ public class Administradora {
         return descomposicion;
     }
 
-    //TODO
+    //TODO CALCULAR DESCOMPOSICION EN FNBC
     public ArrayList<ArrayList<DependenciaFuncional>> calcularDescomposicionFNBC() {
 
         int tam = fmin.size();
         int i = 0;
         ArrayList<ArrayList<DependenciaFuncional>> descomposicion = new ArrayList<ArrayList<DependenciaFuncional>>();
         ArrayList<DependenciaFuncional> ldfNOFNBC = new ArrayList<DependenciaFuncional>();
-        DependenciaFuncional dfAux;
         ArrayList<String> atributos = new ArrayList<String>();
 
         ArrayList<String> clave = claves.get(0);
-        while (i < tam) {
-            dfAux = fmin.get(i);
+
+        /*
+        for (DependenciaFuncional dfAux : fmin) {
             if (determinarFormaNormalDF(dfAux, clave).soyFNBC()) {
                 ArrayList<DependenciaFuncional> aux = new ArrayList<DependenciaFuncional>();
                 aux.add(dfAux);
                 descomposicion.add(aux);
+                atributos.addAll(dfAux.getDeterminante());
             } else {
                 ldfNOFNBC.add(dfAux);
                 atributos.addAll(dfAux.dameAtributos());
             }
         }
+        */
 
+        //Determino si hay alguna Dep Funcional que no cumpla con la FNBC
+        for (DependenciaFuncional dfAux : fmin) {
+            atributos.addAll(dfAux.dameAtributos());
+            if (!determinarFormaNormalDF(dfAux, clave).soyFNBC()) {
+                ldfNOFNBC.add(dfAux);
+            }
+        }
+        if (ldfNOFNBC.isEmpty()) {
+            atributos.clear();
+            descomposicion.add(fmin);
+        } else {
+            ldfNOFNBC.clear();
+            ldfNOFNBC.addAll(fmin);
+        }
+        //Dejo una lista de atributos No repetidos
+        atributos = new ArrayList<String>(new HashSet<String>(atributos));
+
+        //Tengo una copia de la lista
+        ArrayList<DependenciaFuncional> ldf = new ArrayList<>();
+        ldf.addAll(ldfNOFNBC);
+
+        boolean cambios = true;
+        //R en R1 = X U A   y  R2  = X - A
+        while (cambios && !ldf.isEmpty()) {
+            cambios = false;
+            //Lista Atributo
+            ArrayList<DependenciaFuncional> lAuxiliar = new ArrayList<>();
+            ArrayList<DependenciaFuncional> lArecorrer = new ArrayList<>(ldf);
+
+            for (DependenciaFuncional dependenciaFuncional : lArecorrer) {
+
+                ArrayList<String> determinante = dependenciaFuncional.getDeterminante();
+                ArrayList<String> determinado = dependenciaFuncional.getDeterminado();
+
+                if (atributos.containsAll(determinante) && atributos.containsAll(determinado)) {
+                    cambios = true;
+                    atributos.removeAll(determinado);
+                    lAuxiliar.add(dependenciaFuncional);
+                    ldf.remove(dependenciaFuncional);
+                    descomposicion.add(lAuxiliar);
+                }
+            }
+        }
+        //Si tengo Atributos sueltos tengo que crear una dependencia funcional
+        if (!lAtributos.isEmpty()) {
+            ArrayList<DependenciaFuncional> dependencias = new ArrayList<>();
+            dependencias.add((atributos.size() == 1) ? new DFSimple(atributos.get(0), "") : new DFDeterminanteComplejo(atributos, ""));//Depende si es determinante es  simple o compleja
+            descomposicion.add(dependencias);
+        }
 
         return descomposicion;
     }
@@ -356,6 +404,7 @@ public class Administradora {
 
         ArrayList<DependenciaFuncional> lAuxDependenciaFuncional = new ArrayList<DependenciaFuncional>();
 
+        //variables para comparar si las clausuras son redundantes
         ArrayList<String> A;
         ArrayList<String> B;
 
@@ -596,7 +645,6 @@ public class Administradora {
     public boolean isTableauxHayPerdidaDeInformacion() {
         return tableauxHayPerdidaDeInformacion;
     }
-
 
 
 }

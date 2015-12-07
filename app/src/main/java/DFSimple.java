@@ -41,7 +41,8 @@ public class DFSimple extends DependenciaFuncional{
 
     @Override
     public String toString() {
-        return this.determinante+" -> "+this.determinado;
+        //return this.determinante+" -> "+this.determinado;
+        return determinante + ((!determinado.isEmpty()) ? " - > " : "") + determinado;
     }
 
     @Override

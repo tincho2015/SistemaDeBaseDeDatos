@@ -97,6 +97,7 @@ public class DFDeterminadoComplejo extends DependenciaFuncional {
         aux.add(determinante);
         aux.addAll(determinado);
         aux = new ArrayList<String>(new HashSet<String>(aux));
+
         return aux;
     }
 }

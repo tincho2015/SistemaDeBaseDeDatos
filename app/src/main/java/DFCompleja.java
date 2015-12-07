@@ -52,19 +52,7 @@ public class DFCompleja extends DependenciaFuncional {
 
     @Override
     public String toString() {
-        /*
-        String s="";
-        for (String d : determinante) {
-            s+=d+",";
-        }
-        if(s.endsWith(",")){s=s.substring(0,s.length()-2);}
-        s+=" -> ";
-        for (String d : determinado) {
-            s+=d+",";
-        }
-        if(s.endsWith(",")){s=s.substring(0,s.length()-2);}
-        return s;*/
-        return determinante+" - > "+determinado;
+        return determinante + " -> " + determinado;
     }
 
     @Override
