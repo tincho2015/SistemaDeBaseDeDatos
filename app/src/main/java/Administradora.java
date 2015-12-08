@@ -1,3 +1,9 @@
+import android.content.Context;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,6 +22,7 @@ public class Administradora {
     private ArrayList<DependenciaFuncional> lDependenciasFuncionales;
     private ArrayList<ArrayList<String>> claves;
     private ArrayList<DependenciaFuncional> fmin;
+    private ArrayList<ArrayList<ArrayList<Integer>>> cambiosTableaux;
     private FormaNormal formaNormal;
     private boolean tableauxHayPerdidaDeInformacion;
 
@@ -31,6 +38,7 @@ public class Administradora {
         fmin = new ArrayList<DependenciaFuncional>();
         formaNormal = null;
         tableauxHayPerdidaDeInformacion = true;
+        cambiosTableaux = new ArrayList<ArrayList<ArrayList<Integer>>>();
     }
 
     //ATRIBUTOS
@@ -321,7 +329,7 @@ public class Administradora {
         return descomposicion;
     }
 
-    //TODO CALCULAR DESCOMPOSICION EN FNBC
+
     public ArrayList<ArrayList<DependenciaFuncional>> calcularDescomposicionFNBC() {
 
         int tam = fmin.size();
@@ -507,6 +515,9 @@ public class Administradora {
     public ArrayList<String[][]> calcularTableaux(ArrayList<ArrayList<String>> subEsquemas) {
 
         ArrayList<String[][]> tableaux = new ArrayList<String[][]>();
+        ArrayList<ArrayList<Integer>> cambiosxDf;
+
+        cambiosTableaux.clear();
 
         boolean lineaCompleta = false;
         boolean hayCambios = true;
@@ -554,13 +565,16 @@ public class Administradora {
 
             for (DependenciaFuncional df : fmin) {
                 //HashMap<AtributoDeterminante,valorDeterminado> valoresReemplazo
+
+                cambiosxDf = new ArrayList<ArrayList<Integer>>();
+                ArrayList<Integer> FilaXColumaCambios = new ArrayList<Integer>();
+
                 HashMap<String, String> valoresReemplazo = new HashMap<String, String>();
 
                 ArrayList<Integer> posAtributo = new ArrayList<>();
 
                 for (String atributoDeterminante : df.getDeterminante()) {
                     posAtributo.add(posicionAtributo.get(atributoDeterminante));
-
                 }
 
                 for (indexEsquema = 0; indexEsquema < tamSubEsquema; indexEsquema++) {
@@ -599,6 +613,9 @@ public class Administradora {
                                         //Verifico Cambios
                                         if (tabla[i][posicionAtributo.get(df.getDeterminado())].contains("b") &&
                                                 tabla[i][posicionAtributo.get(df.getDeterminado())].equals(valorDeterminado)) {
+                                            FilaXColumaCambios.add(posicionAtributo.get(df.getDeterminado()));//Fila
+                                            FilaXColumaCambios.add(i);//Columna
+                                            //cambiosxDf.add(FilaXColumaCambios);
                                             if (valorDeterminado.contains("A")) {
                                                 cantidadAxFila[i] = cantidadAxFila[i] + 1;
                                             }
@@ -620,6 +637,9 @@ public class Administradora {
                             cantidadAxFila[indexEsquema] = cantidadAxFila[indexEsquema] + 1;
                         }
                         hayCambios = true;
+                        FilaXColumaCambios.add(posicionAtributo.get(df.getDeterminado()));//Fila
+                        FilaXColumaCambios.add(indexEsquema);//Columna
+
 
                         tabla[indexEsquema][posicionAtributo.get(df.getDeterminado())] = valorCambio;
                     }
@@ -636,6 +656,8 @@ public class Administradora {
                     }
                     indexFila++;
                 }
+                cambiosxDf.add(FilaXColumaCambios);
+                cambiosTableaux.add(cambiosxDf);
             }//Cierra el For DE DEPENDENCIAS FUNCIONALES
         }
 
@@ -646,5 +668,115 @@ public class Administradora {
         return tableauxHayPerdidaDeInformacion;
     }
 
+    public ArrayList<ArrayList<ArrayList<Integer>>> darCambiosTableaux() {
+        //POR CADA CAMBIO EN EL TABLAUX      EN CADA DF         EL PRIMER DATO FILA en el 2do COLUMNA
+        //ARRAYLIST<                        ARRAYLIST<          ArrayList<Integer>>>
+        ArrayList<ArrayList<ArrayList<Integer>>> cambios = new ArrayList<ArrayList<ArrayList<Integer>>>();
+        if (!cambiosTableaux.isEmpty())
+            cambios.addAll(cambiosTableaux);
+        return cambios;
+    }
+
+    public void guardarArchivo(String nombreArchivo, String directorio, Context context) {
+        JSONObject job = new JSONObject();
+
+        JSONArray lAtributo = new JSONArray();
+        for (String la : lAtributos) {
+            lAtributo.put(la);
+        }
+
+        try {
+            job.put("lAtributos", lAtributo);
+
+            JSONArray lDependenciaFuncional = new JSONArray();
+
+            for (DependenciaFuncional df : lDependenciasFuncionales) {
+                JSONObject depFuncional = new JSONObject();
+                JSONArray determinante = new JSONArray();
+
+                for (String s : df.getDeterminante()) {
+                    determinante.put(s);
+                }
+
+                JSONArray determinado = new JSONArray();
+                for (String s : df.getDeterminado()) {
+                    determinado.put(s);
+                }
+
+                depFuncional.put("determinantes", determinante);
+                depFuncional.put("determinados", determinado);
+                lDependenciaFuncional.put(depFuncional);
+            }
+
+            GestorArchivos.guardarArchivo(job, nombreArchivo, directorio, context);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void cargarArchivo(String nombreArchivo, String directorio, Context context) {
+
+        Runtime garbage = Runtime.getRuntime();
+        garbage.gc();
+
+        lAtributos = new ArrayList<String>();
+        lDependenciasFuncionales = new ArrayList<DependenciaFuncional>();
+        claves = new ArrayList<ArrayList<String>>();
+        fmin = new ArrayList<DependenciaFuncional>();
+        formaNormal = null;
+        tableauxHayPerdidaDeInformacion = true;
+        cambiosTableaux = new ArrayList<ArrayList<ArrayList<Integer>>>();
+
+        try {
+            JSONObject job = new JSONObject(GestorArchivos.cargarArchivo(nombreArchivo, directorio, context));
+            JSONArray jsonArray = job.getJSONArray("lAtributos");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                lAtributos.add(jsonArray.get(i).toString());
+            }
+
+            jsonArray = job.getJSONArray("lDependenciaFuncional");
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                DependenciaFuncional df;
+                ArrayList<String> determinantes = new ArrayList<>();
+                ArrayList<String> determinado = new ArrayList<>();
+
+                JSONObject aux = jsonArray.getJSONObject(i);
+
+                JSONArray jsonDeterminantes = aux.getJSONArray("determinantes");
+                for (int j = 0; j < jsonDeterminantes.length(); j++) {
+                    determinantes.add(jsonDeterminantes.get(j).toString());
+                }
+
+
+                JSONArray jsonDeterminado = aux.getJSONArray("determinados");
+                for (int j = 0; j < jsonDeterminado.length(); j++) {
+                    determinado.add(jsonDeterminado.get(j).toString());
+                }
+
+                if (jsonDeterminantes.length() > 1) {
+                    if (jsonDeterminado.length() > 1)
+                        df = new DFCompleja(determinantes, determinado);
+                    else
+                        df = new DFDeterminanteComplejo(determinantes, determinado.get(0));
+                } else {
+                    if (jsonDeterminado.length() > 1)
+                        df = new DFDeterminadoComplejo(determinantes.get(0), determinado);
+                    else
+                        df = new DFSimple(determinantes.get(0), determinado.get(0));
+                }
+
+                lDependenciasFuncionales.add(df);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
