@@ -1,11 +1,20 @@
 <resources>
     <string name="app_name">SistemaDeBaseDeDatos</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
+    <string name="title_section1">Busqueda</string>
+    <string name="title_section2">Busqueda 2</string>
     <string name="title_section3">Section 3</string>
 
     <string name="hello_world">Hello world!</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_tablaux">Tablaux</string>
+    <string name="title_activity_pasos_tablaux">Pasos de tablaux</string>
+    <string name="title_activity_resultado_clausura">Resultado de la clausura</string>
+    <string name="title_boton1">Buscar</string>
+    <string name="title_activity_calculo_clausura">calculo_clausura</string>
+    <string name="title_activity_nv_calculo_clausura">nv_calculo_clausura</string>
+
+
+
 </resources>

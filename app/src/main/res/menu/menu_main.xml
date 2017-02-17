@@ -1,6 +1,46 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/button"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+        app:showAsAction="always"
+      />
+    <item
+        android:id="@+id/menu_desplegable"
+        android:title="Menu"
+        android:orderInCategory="100"
+        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+        app:showAsAction="ifRoom"
+        />
+    <item android:id="@+id/add"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/title_boton1"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/title_boton1"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/edit"
+        android:title="@string/title_boton1"
+        android:orderInCategory="3"
+        app:showAsAction="never"/>
+    <item android:id="@+id/delete"
+        android:title="@string/title_boton1"
+        android:orderInCategory="4"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+
+
 </menu>

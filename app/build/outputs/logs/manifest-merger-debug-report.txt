@@ -1,53 +1,93 @@
 -- Merging decision tree log ---
 manifest
-ADDED from AndroidManifest.xml:2:1
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:2:1-37:12
 	package
-		ADDED from AndroidManifest.xml:3:5
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:3:5-43
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
 application
-ADDED from AndroidManifest.xml:5:5
-MERGED from com.android.support:appcompat-v7:22.1.1:22:5
-MERGED from com.android.support:support-v4:22.1.1:22:5
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:5:5-35:19
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\design\22.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:22:5-20
 	android:label
-		ADDED from AndroidManifest.xml:8:9
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:8:9-41
 	android:allowBackup
-		ADDED from AndroidManifest.xml:6:9
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:6:9-35
 	android:icon
-		ADDED from AndroidManifest.xml:7:9
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:7:9-43
 	android:theme
-		ADDED from AndroidManifest.xml:9:9
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:9:9-40
 activity#mglteam.sistemadebasededatos.MainActivity
-ADDED from AndroidManifest.xml:10:9
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:10:9-18:20
 	android:label
-		ADDED from AndroidManifest.xml:12:13
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:12:13-45
 	android:name
-		ADDED from AndroidManifest.xml:11:13
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:11:13-41
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:13:13
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:13:13-17:29
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:14:17
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:14:17-69
 	android:name
-		ADDED from AndroidManifest.xml:14:25
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:14:25-66
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:16:17
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:16:17-77
 	android:name
-		ADDED from AndroidManifest.xml:16:27
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:16:27-74
+activity#mglteam.sistemadebasededatos.calculo_clausura
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:19:9-22:59
+	android:label
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:21:13-68
+	android:theme
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:22:13-56
+	android:name
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:20:13-45
+activity#mglteam.sistemadebasededatos.Tablaux
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:23:9-26:59
+	android:label
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:25:13-59
+	android:theme
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:26:13-56
+	android:name
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:24:13-36
+activity#mglteam.sistemadebasededatos.pasos_tablaux
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:27:9-30:59
+	android:label
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:29:13-65
+	android:theme
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:30:13-56
+	android:name
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:28:13-42
+activity#mglteam.sistemadebasededatos.resultado_clausura
+ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:31:9-34:59
+	android:label
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:33:13-70
+	android:theme
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:34:13-56
+	android:name
+		ADDED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml:32:13-47
 uses-sdk
-INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
-MERGED from com.android.support:appcompat-v7:22.1.1:20:5
-MERGED from com.android.support:support-v4:22.1.1:20:5
+INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\design\22.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Dark Knight\Desktop\Documentos\SistemaDeBaseDeDatos\app\src\main\AndroidManifest.xml

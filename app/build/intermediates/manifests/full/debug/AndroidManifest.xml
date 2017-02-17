@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="mglteam.sistemadebasededatos.calculo_clausura"
+            android:label="@string/title_activity_calculo_clausura"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mglteam.sistemadebasededatos.Tablaux"
+            android:label="@string/title_activity_tablaux"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mglteam.sistemadebasededatos.pasos_tablaux"
+            android:label="@string/title_activity_pasos_tablaux"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mglteam.sistemadebasededatos.resultado_clausura"
+            android:label="@string/title_activity_resultado_clausura"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

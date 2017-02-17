@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mglteam.sistemadebasededatos" >
+    package="mglteam.sistemadebasededatos">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Tablaux"
+            android:label="@string/title_activity_tablaux"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pasos_tablaux"
+            android:label="@string/title_activity_pasos_tablaux"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".resultado_clausura"
+            android:label="@string/title_activity_resultado_clausura"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".calculo_clausura"
+            android:label="@string/title_activity_calculo_clausura"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
